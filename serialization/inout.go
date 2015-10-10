@@ -3,7 +3,7 @@ package serialization
 import (
 	"github.com/golang/protobuf/proto"
 	"io/ioutil"
-	stats "github.com/milanaleksic/flowdock_stats"
+	stats "github.com/milanaleksic/flowdock_stats/cmd_colors"
 	"fmt"
 )
 
@@ -22,7 +22,7 @@ func GetKnownUsers() (catalog *Catalog) {
 }
 
 func SaveUsers(catalog *Catalog) {
-	bytes, err := proto.Marshal(&catalog)
+	bytes, err := proto.Marshal(catalog)
 	if err != nil {
 		stats.Warn(fmt.Sprint("Unable to save known users ", err))
 	}

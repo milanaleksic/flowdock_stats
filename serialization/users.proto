@@ -1,0 +1,13 @@
+syntax = "proto3";
+
+package serialization;
+
+message Catalog {
+
+    message User {
+        string userId = 1;
+        string username = 2;
+    }
+
+    map<string, User> users = 1;
+}

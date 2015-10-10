@@ -6,9 +6,9 @@
 
 **work under progress**
 
-This is a prototype of a digesting small application written in Go language that digests Flowdock REST API.
+This is a prototype of a small application written in Go language that digests Flowdock REST API.
  
-The only _statistics_ that it gives is "who is the biggest talker" during a particular time span.
+The only _statistics_ that it gives at this time is the "list of biggest talkers" during a particular time span, together with percentage of them fixing (_editing_) their comments after the send was done.
 
 To avoid fetching all the users all the time, it will serialize locally. Since it uses proto3 which is currently in BETA
 you will need to do following steps until GA of proto3 is announced:

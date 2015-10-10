@@ -31,7 +31,6 @@ func (context *Context) calculateStatsForAMessage(msg flowdock.Message) {
 	}
 	stat.words += len(wordsRegex.FindAllString(string(msg.Content), -1))
 	context.statistics[msg.User] = stat
-	//printOutContents(msg)
 }
 
 func (context *Context) fetchMessages() {

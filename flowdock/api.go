@@ -107,12 +107,3 @@ func (api *FlowdockApi) GetUser(userId string) (userNick string, err error) {
 	userNick = result.Nick
 	return
 }
-
-func printOutContents(msg Message) {
-	var content string
-	err := json.Unmarshal(msg.Content, &content)
-	if err != nil {
-		cmd.Warn(fmt.Sprint("Could not parse contents: ", err))
-	}
-	cmd.Info(fmt.Sprintf(msg.User, " said: ", content, " id=", msg.Id, " at ", msg.CreatedAt))
-}

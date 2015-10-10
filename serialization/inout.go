@@ -3,7 +3,7 @@ package serialization
 import (
 	"github.com/golang/protobuf/proto"
 	"io/ioutil"
-	stats "milanaleksic.net/milanaleksic/flowdock-stats"
+	stats "github.com/milanaleksic/flowdock_stats"
 	"fmt"
 )
 

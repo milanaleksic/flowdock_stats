@@ -1,6 +1,5 @@
 # Flowdock statistics
 
-
 ![status of the build on Travis](https://travis-ci.org/milanaleksic/flowdock_stats.svg "")
 
 ## Idea

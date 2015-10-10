@@ -4,6 +4,7 @@ import (
 	"time"
 	"flag"
 	"fmt"
+	"github.com/milanaleksic/flowdock_stats/flowdock"
 )
 
 func main() {
@@ -19,10 +20,10 @@ func main() {
 	}
 
 	context := Context{
-		flowdockApiToken: *flowdockApiToken,
 		timeToLookInto: time.Hour * 24 * time.Duration(*days),
 		companyToAnalyze: *companyToAnalyze,
 		flowToAnalyze: *flowToAnalyze,
+		api: flowdock.FlowdockApi{ApiToken:*flowdockApiToken},
 	}
 	context.fetchMessages()
 	context.enrichStatisticsWithRealUserNames()

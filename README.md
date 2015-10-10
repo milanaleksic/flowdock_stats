@@ -25,9 +25,11 @@ If you have Go SDK (1.5.1 is the one I used), all you need to do is
 
 Following arguments are needed for application to know which flow it should access and parse through:
 
-    flowdock_stats -flowdockApiToken=API_TOKEN -companyToAnalyze=COMPANY_NAME -flowToAnalyze=FLOW_NAME
+    flowdock_stats -flowdockApiToken=API_TOKEN -companyToAnalyze=COMPANY_NAME -flowToAnalyze=FLOW_NAME -days=DAYS
     
 Both `COMPANY_NAME` and `FLOW_NAME` can be read from the URL of a flow, currently it's sth like: 
 https://www.flowdock.com/app/COMPANY_NAME/FLOW_NAME 
 
-And the `API_TOKEN` can be taken from the page https://www.flowdock.com/account/tokens 
+And the `API_TOKEN` can be taken from the page https://www.flowdock.com/account/tokens.
+
+If you don't want to look only for messages posted in last 24 hours but also longer, set `days` parameter to some value

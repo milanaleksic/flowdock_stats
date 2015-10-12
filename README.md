@@ -8,11 +8,14 @@
 
 This is a prototype of a small application written in Go language that digests Flowdock REST API.
  
-The only _statistics_ that it gives at this time is the "list of biggest talkers" during a particular time span, together with percentage of them fixing (_editing_) their comments after the send was done.
+_Statistics_ that it calculates during a particular time span are:
+- which user had how many comments on a chosen flow,
+- percentage of them fixing (_editing_) their comments after sending the comment,
+- number of words per comment.
 
 To avoid fetching all the users all the time, it will serialize locally. Since it uses proto3 which is currently in BETA
-you will need to do following steps until GA of proto3 is announced:
-- to download suitable compiled protobuf compiler package from https://github.com/google/protobuf/releases
+_in case you wish to change the serialization format_ you will need to do following steps until GA of proto3 is announced:
+- download suitable protobuf compiler package from https://github.com/google/protobuf/releases
 - install Go plugin for protobuf compiler https://github.com/grpc/grpc-go/tree/master/examples 
  
 ## How to install

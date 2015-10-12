@@ -1,21 +1,21 @@
 package serialization
 
 import (
-	"github.com/golang/protobuf/proto"
-	"io/ioutil"
-	stats "github.com/milanaleksic/flowdock_stats/cmd_colors"
 	"fmt"
+	"github.com/golang/protobuf/proto"
+	stats "github.com/milanaleksic/flowdock_stats/cmd_colors"
+	"io/ioutil"
 )
 
 func GetKnownUsers() (catalog *Catalog) {
-	catalog = &Catalog{Users:map[string]*Catalog_User{}}
+	catalog = &Catalog{Users: map[string]*Catalog_User{}}
 	bytes, err := ioutil.ReadFile("users.dat")
 	if err != nil {
 		stats.Warn("No users file found, will generate from beginning")
 	} else {
 		err = proto.Unmarshal(bytes, catalog)
 		if err != nil {
-			panic("No users found, will generate from beginning")
+			panic("Users file users.dat found, but it's nor parsable! Try deleting the file.")
 		}
 	}
 	return

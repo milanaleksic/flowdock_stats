@@ -1,10 +1,10 @@
 package main
 
 import (
-	"time"
 	"flag"
-	"fmt"
+	cmd "github.com/milanaleksic/flowdock_stats/cmd_colors"
 	"github.com/milanaleksic/flowdock_stats/flowdock"
+	"time"
 )
 
 func main() {
@@ -15,15 +15,15 @@ func main() {
 	flag.Parse()
 
 	if *flowdockApiToken == "" || *companyToAnalyze == "" || *flowToAnalyze == "" {
-		fmt.Errorf("flowdockApiToken, companyToAnalyze and flowToAnalyze are mandatory program arguments. Please use --help to see them")
+		cmd.Warn("flowdockApiToken, companyToAnalyze and flowToAnalyze are mandatory program arguments. Please use --help to see command line help")
 		return
 	}
 
 	context := Context{
-		timeToLookInto: time.Hour * 24 * time.Duration(*days),
+		timeToLookInto:   time.Hour * 24 * time.Duration(*days),
 		companyToAnalyze: *companyToAnalyze,
-		flowToAnalyze: *flowToAnalyze,
-		api: flowdock.FlowdockApi{ApiToken:*flowdockApiToken},
+		flowToAnalyze:    *flowToAnalyze,
+		api:              flowdock.FlowdockApi{ApiToken: *flowdockApiToken},
 	}
 	context.fetchMessages()
 	context.enrichStatisticsWithRealUserNames()

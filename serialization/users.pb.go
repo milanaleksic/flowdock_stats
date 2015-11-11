@@ -45,3 +45,8 @@ type Catalog_User struct {
 func (m *Catalog_User) Reset()         { *m = Catalog_User{} }
 func (m *Catalog_User) String() string { return proto.CompactTextString(m) }
 func (*Catalog_User) ProtoMessage()    {}
+
+func init() {
+	proto.RegisterType((*Catalog)(nil), "serialization.Catalog")
+	proto.RegisterType((*Catalog_User)(nil), "serialization.Catalog.User")
+}

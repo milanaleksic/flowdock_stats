@@ -17,6 +17,7 @@ To avoid fetching all the users all the time, it will serialize locally. Since i
 _in case you wish to change the serialization format_ you will need to do following steps until GA of proto3 is announced:
 - download suitable protobuf compiler package from https://github.com/google/protobuf/releases
 - install Go plugin for protobuf compiler https://github.com/grpc/grpc-go/tree/master/examples 
+- this will allow you to do `protoc --go_out=plugins=grpc:. *.proto` from within `serialization` directory
  
 ## How to install
 

@@ -2,7 +2,7 @@ package main
 
 import (
 	"flag"
-	cmd "github.com/milanaleksic/flowdock_stats/cmd_colors"
+	cmd "github.com/milanaleksic/flowdock_stats/cmdcolors"
 	"github.com/milanaleksic/flowdock_stats/flowdock"
 	"time"
 )

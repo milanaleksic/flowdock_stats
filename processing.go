@@ -25,9 +25,9 @@ func (context *Context) calculateStatsForAMessage(msg flowdock.Message) {
 	if !ok {
 		stat = Stat{}
 	}
-	stat.numberOfAppearances += 1
+	stat.numberOfAppearances++
 	if msg.Edited != 0 {
-		stat.numberOfEdits += 1
+		stat.numberOfEdits++
 	}
 	stat.words += len(wordsRegex.FindAllString(string(msg.Content), -1))
 	context.statistics[msg.User] = stat
@@ -35,10 +35,10 @@ func (context *Context) calculateStatsForAMessage(msg flowdock.Message) {
 
 func (context *Context) fetchMessages() {
 	context.statistics = make(map[string]Stat)
-	var lastId int = -1
+	var lastID = -1
 	var begin = time.Now().Add(-context.timeToLookInto)
 	for {
-		messages, err := context.api.GetMessages(context.companyToAnalyze, context.flowToAnalyze, lastId)
+		messages, err := context.api.GetMessages(context.companyToAnalyze, context.flowToAnalyze, lastID)
 		if err != nil {
 			cmd.Warn(fmt.Sprintf("Giving up from messages fetching: %v", err))
 			break
@@ -52,9 +52,9 @@ func (context *Context) fetchMessages() {
 			if messages[0].CreatedAt.Before(begin) {
 				break
 			} else {
-				cmd.InfoInline(fmt.Sprintf("Fetching messages: %d%%", int64(100 - 100 * (messages[0].CreatedAt.UnixNano() - begin.UnixNano()) / context.timeToLookInto.Nanoseconds())))
+				cmd.InfoInline(fmt.Sprintf("Fetching messages: %d%%", 100 - 100 * (messages[0].CreatedAt.UnixNano() - begin.UnixNano()) / context.timeToLookInto.Nanoseconds()))
 			}
-			lastId = messages[0].Id
+			lastID = messages[0].ID
 		}
 	}
 	cmd.Info(fmt.Sprintf("%-30s", "Messages downloaded"))
@@ -79,17 +79,17 @@ func (context *Context) enrichStatisticsWithRealUserNames() {
 	cmd.Info(fmt.Sprintf("%-30s", "Users downloaded"))
 }
 
-func (context *Context) getUserName(catalog *map[string]*serialization.Catalog_User, userId string) (userNick string, err error) {
-	if knownUser, ok := (*catalog)[userId]; ok {
+func (context *Context) getUserName(catalog *map[string]*serialization.Catalog_User, userID string) (userNick string, err error) {
+	if knownUser, ok := (*catalog)[userID]; ok {
 		userNick = knownUser.Username
 		return
 	}
-	userNick, err = context.api.GetUser(userId)
+	userNick, err = context.api.GetUser(userID)
 	if err != nil {
 		return
 	}
-	catalogUser := serialization.Catalog_User{UserId:userId, Username: userNick}
-	(*catalog)[userId] = &catalogUser
+	catalogUser := serialization.Catalog_User{UserId:userID, Username: userNick}
+	(*catalog)[userID] = &catalogUser
 	return
 }
 

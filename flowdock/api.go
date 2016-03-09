@@ -10,14 +10,14 @@ import (
 )
 
 type User struct {
-	Nick string `json: "nick"`
+	Nick string `json:"nick"`
 }
 
 type Message struct {
 	User      string          `json:"user"`
 	Edited    int             `json:"edited"`
 	Content   json.RawMessage `string:"content,omitempty"`
-	Id        int             `json:"id"`
+	ID        int             `json:"id"`
 	CreatedAt CustomTime      `json:"created_at"`
 }
 
@@ -42,10 +42,10 @@ func (d *CustomTime) UnmarshalJSON(b []byte) (err error) {
 }
 
 type FlowdockApi struct {
-	ApiToken string
+	APIToken string
 }
 
-// Which company's flow should be scanned for messages? Also, until when do we want to get the messages.
+// GetMessages carries information about which company's flow should be scanned for messages? Also, until when do we want to get the messages.
 // In case you only want the last block of the messages, until should be set to -1.
 func (api *FlowdockApi) GetMessages(company string, flow string, until int) (messages []Message, err error) {
 	flowLocation := fmt.Sprintf("https://api.flowdock.com/flows/%s/%s/messages", company, flow)
@@ -55,7 +55,7 @@ func (api *FlowdockApi) GetMessages(company string, flow string, until int) (mes
 		return
 	}
 
-	request.SetBasicAuth(api.ApiToken, "")
+	request.SetBasicAuth(api.APIToken, "")
 	values := request.URL.Query()
 	if until != -1 {
 		values.Add("until_id", strconv.Itoa(until))
@@ -73,7 +73,7 @@ func (api *FlowdockApi) GetMessages(company string, flow string, until int) (mes
 		cmd.Warn(fmt.Sprintf("Server responded with a non 200: %v", resp.StatusCode))
 		return
 	}
-	defer resp.Body.Close()
+	defer func() { _ = resp.Body.Close() }()
 	messages = make([]Message, 100)
 	err = json.NewDecoder(resp.Body).Decode(&messages)
 	if err != nil {
@@ -83,21 +83,21 @@ func (api *FlowdockApi) GetMessages(company string, flow string, until int) (mes
 	return
 }
 
-// Get a "Nick name" of a user in Flowdock based on his/hers numeric ID
-func (api *FlowdockApi) GetUser(userId string) (userNick string, err error) {
-	request, err := http.NewRequest("GET", "https://api.flowdock.com/users/" + userId, nil)
+// GetUser gets a "Nick name" of a user in Flowdock based on his/hers numeric ID
+func (api *FlowdockApi) GetUser(userID string) (userNick string, err error) {
+	request, err := http.NewRequest("GET", "https://api.flowdock.com/users/" + userID, nil)
 	if err != nil {
 		cmd.Warn(fmt.Sprintf("Error encountered while fetching: %v", err))
 		return
 	}
-	request.SetBasicAuth(api.ApiToken, "")
+	request.SetBasicAuth(api.APIToken, "")
 	client := &http.Client{}
 	resp, err := client.Do(request)
 	if err != nil {
 		cmd.Warn(fmt.Sprintf("Error encountered while fetching: %v", err))
 		return
 	}
-	defer resp.Body.Close()
+	defer func() { _ = resp.Body.Close() }()
 	result := User{}
 	err = json.NewDecoder(resp.Body).Decode(&result)
 	if err != nil {

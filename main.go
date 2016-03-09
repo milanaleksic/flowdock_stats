@@ -9,13 +9,13 @@ import (
 
 func main() {
 	days := flag.Int("days", 1, "number of days to look in the history")
-	flowdockApiToken := flag.String("flowdockApiToken", "", "Flowdock API token (from https://www.flowdock.com/account/tokens)")
+	flowdockAPIToken := flag.String("flowdockApiToken", "", "Flowdock API token (from https://www.flowdock.com/account/tokens)")
 	companyToAnalyze := flag.String("companyToAnalyze", "", "Company whose Flowdock flows are to be analyzed")
 	flowToAnalyze := flag.String("flowToAnalyze", "", "Company's Flow to analyze")
 	flag.Parse()
 
-	if *flowdockApiToken == "" || *companyToAnalyze == "" || *flowToAnalyze == "" {
-		cmd.Warn("flowdockApiToken, companyToAnalyze and flowToAnalyze are mandatory program arguments. Please use --help to see command line help")
+	if *flowdockAPIToken == "" || *companyToAnalyze == "" || *flowToAnalyze == "" {
+		cmd.Warn("flowdockAPIToken, companyToAnalyze and flowToAnalyze are mandatory program arguments. Please use --help to see command line help")
 		return
 	}
 
@@ -23,7 +23,7 @@ func main() {
 		timeToLookInto:   time.Hour * 24 * time.Duration(*days),
 		companyToAnalyze: *companyToAnalyze,
 		flowToAnalyze:    *flowToAnalyze,
-		api:              flowdock.FlowdockApi{ApiToken: *flowdockApiToken},
+		api:              flowdock.FlowdockApi{APIToken: *flowdockAPIToken},
 	}
 	context.fetchMessages()
 	context.enrichStatisticsWithRealUserNames()

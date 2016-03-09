@@ -5,10 +5,10 @@ import (
 	"fmt"
 )
 
-var greenFormat func(string) string = ansi.ColorFunc("green+b+h")
-var redFormat func(string) string = ansi.ColorFunc("red+b+h")
-var blueFormat func(string) string = ansi.ColorFunc("blue+b+h")
-var resetFormat string = ansi.ColorCode("reset")
+var greenFormat = ansi.ColorFunc("green+b+h")
+var redFormat = ansi.ColorFunc("red+b+h")
+var blueFormat = ansi.ColorFunc("blue+b+h")
+var resetFormat = ansi.ColorCode("reset")
 
 var Info = func(message string) {
 	fmt.Println("\r" + greenFormat(message) + resetFormat)

@@ -2,7 +2,7 @@ APP_NAME := flowdock_stats
 SHELL := /bin/bash
 GOPATH := ${GOPATH}
 SOURCEDIR = .
-SOURCES := $(shell find $(SOURCEDIR) -name '*.go')
+SOURCES := $(shell find $(SOURCEDIR) -name '*.go' -not -name '*.pb.go')
 
 VERSION := $(shell git name-rev --tags --name-only `git rev-parse HEAD`)
 IS_DEFINED_VERSION := $(shell [ ! "${VERSION}" == "undefined" ] && echo true)
@@ -15,7 +15,7 @@ ${APP_NAME}: $(SOURCES)
 
 .PHONY: metalinter
 metalinter: ${APP_NAME}
-	gometalinter --deadline=2m ./...
+	gometalinter --exclude=".*.pb.go" --deadline=2m ./...
 
 .PHONY: deploy-if-tagged
 deploy-if-tagged: $(SOURCES)
@@ -101,7 +101,5 @@ upx:
 
 .PHONY: clean
 clean:
-	rm -rf ${BINDATA_DEBUG_FILE}
-	rm -rf ${BINDATA_RELEASE_FILE}
 	rm -rf ${APP_NAME}
 	rm -rf ${APP_NAME}.exe

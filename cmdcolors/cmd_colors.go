@@ -1,4 +1,4 @@
-package cmd_colors
+package cmdcolors
 
 import (
 	"github.com/mgutz/ansi"

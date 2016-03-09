@@ -9,7 +9,7 @@ import (
 
 func main() {
 	days := flag.Int("days", 1, "number of days to look in the history")
-	flowdockApiToken := flag.String("flowdockApiToken", "", "Flowdock API token")
+	flowdockApiToken := flag.String("flowdockApiToken", "", "Flowdock API token (from https://www.flowdock.com/account/tokens)")
 	companyToAnalyze := flag.String("companyToAnalyze", "", "Company whose Flowdock flows are to be analyzed")
 	flowToAnalyze := flag.String("flowToAnalyze", "", "Company's Flow to analyze")
 	flag.Parse()

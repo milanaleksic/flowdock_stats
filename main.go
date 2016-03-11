@@ -19,13 +19,13 @@ func main() {
 		return
 	}
 
-	context := Context{
+	mainContext := context{
 		timeToLookInto:   time.Hour * 24 * time.Duration(*days),
 		companyToAnalyze: *companyToAnalyze,
 		flowToAnalyze:    *flowToAnalyze,
-		api:              flowdock.FlowdockApi{APIToken: *flowdockAPIToken},
+		api:              flowdock.API{APIToken: *flowdockAPIToken},
 	}
-	context.fetchMessages()
-	context.enrichStatisticsWithRealUserNames()
-	context.presentStatistics()
+	mainContext.fetchMessages()
+	mainContext.enrichStatisticsWithRealUserNames()
+	mainContext.presentStatistics()
 }

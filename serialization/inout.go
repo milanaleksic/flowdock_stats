@@ -7,9 +7,15 @@ import (
 	"io/ioutil"
 )
 
+const cacheFile = "users.dat"
+
+/*
+GetKnownUsers gets from local cache file all known users.
+In case cache file doesn't exist, it will return empty catalog
+*/
 func GetKnownUsers() (catalog *Catalog) {
 	catalog = &Catalog{Users: map[string]*Catalog_User{}}
-	bytes, err := ioutil.ReadFile("users.dat")
+	bytes, err := ioutil.ReadFile(cacheFile)
 	if err != nil {
 		stats.Warn("No users file found, will generate from beginning")
 	} else {
@@ -21,12 +27,15 @@ func GetKnownUsers() (catalog *Catalog) {
 	return
 }
 
-func SaveUsers(catalog *Catalog) {
+/*
+SaveUsers is able to save the catalog to the default users cache file - users.dat
+*/
+func SaveUsers(catalog proto.Message) {
 	bytes, err := proto.Marshal(catalog)
 	if err != nil {
 		stats.Warn(fmt.Sprint("Unable to save known users ", err))
 	}
-	err = ioutil.WriteFile("users.dat", bytes, 0644)
+	err = ioutil.WriteFile(cacheFile, bytes, 0644)
 	if err != nil {
 		stats.Warn(fmt.Sprint("Unable to save known users ", err))
 	}

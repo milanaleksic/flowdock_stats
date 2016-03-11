@@ -1,16 +1,16 @@
 package main
 
-type Stat struct {
+type stat struct {
 	numberOfAppearances int
 	numberOfEdits       int
 	name                string
 	words               int
 }
 
-type StatByNumberOfAppearances []Stat
+type statByNumberOfAppearances []stat
 
-func (a StatByNumberOfAppearances) Len() int      { return len(a) }
-func (a StatByNumberOfAppearances) Swap(i, j int) { a[i], a[j] = a[j], a[i] }
-func (a StatByNumberOfAppearances) Less(i, j int) bool {
+func (a statByNumberOfAppearances) Len() int      { return len(a) }
+func (a statByNumberOfAppearances) Swap(i, j int) { a[i], a[j] = a[j], a[i] }
+func (a statByNumberOfAppearances) Less(i, j int) bool {
 	return a[i].numberOfAppearances < a[j].numberOfAppearances
 }

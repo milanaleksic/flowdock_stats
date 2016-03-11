@@ -2,6 +2,7 @@ package cmdcolors
 
 import (
 	"fmt"
+
 	"github.com/mgutz/ansi"
 )
 

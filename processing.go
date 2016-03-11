@@ -2,12 +2,13 @@ package main
 
 import (
 	"fmt"
-	cmd "github.com/milanaleksic/flowdock_stats/cmdcolors"
-	"github.com/milanaleksic/flowdock_stats/flowdock"
-	"github.com/milanaleksic/flowdock_stats/serialization"
 	"regexp"
 	"sort"
 	"time"
+
+	cmd "github.com/milanaleksic/flowdock_stats/cmdcolors"
+	"github.com/milanaleksic/flowdock_stats/flowdock"
+	"github.com/milanaleksic/flowdock_stats/serialization"
 )
 
 var wordsRegex = regexp.MustCompile("\\w+")

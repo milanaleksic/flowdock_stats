@@ -2,9 +2,10 @@ package serialization
 
 import (
 	"fmt"
+	"io/ioutil"
+
 	"github.com/golang/protobuf/proto"
 	stats "github.com/milanaleksic/flowdock_stats/cmdcolors"
-	"io/ioutil"
 )
 
 const cacheFile = "users.dat"

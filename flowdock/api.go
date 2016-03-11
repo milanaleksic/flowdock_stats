@@ -3,10 +3,11 @@ package flowdock
 import (
 	"encoding/json"
 	"fmt"
-	cmd "github.com/milanaleksic/flowdock_stats/cmdcolors"
 	"net/http"
 	"strconv"
 	"time"
+
+	cmd "github.com/milanaleksic/flowdock_stats/cmdcolors"
 )
 
 /*
@@ -35,15 +36,7 @@ type CustomTime struct {
 	time.Time
 }
 
-// var nilTime = (time.Time{}).UnixNano()
-
 const jsonFormatDate = "2006-01-02T15:04:05.000Z"
-
-/*
-IsSet
-func (ct *CustomTime) IsSet() bool {
-	return ct.UnixNano() != nilTime
-}*/
 
 /*
 UnmarshalJSON allows json unmarshalling from wire to a struct

@@ -12,7 +12,7 @@ SOURCES := $(shell find $(SOURCEDIR) -name '*.go' \
 ${APP_NAME}: $(SOURCES)
 	go build -ldflags '-X main.Version=${TAG}' -o ${APP_NAME}
 
-${RELEASE_SOURCES}: $(SOURCES)
+RELEASE_SOURCES := $(SOURCES)
 
 include gomakefiles/semaphore.mk
 

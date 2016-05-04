@@ -16,10 +16,6 @@ RELEASE_SOURCES := $(SOURCES)
 
 include gomakefiles/semaphore.mk
 
-.PHONY: metalinter
-metalinter: ${APP_NAME}
-	gometalinter --exclude=".*.pb.go" --disable=gotype --vendor --deadline=2m ./...
-
 .PHONY: run
 run: ${APP_NAME}
 ifndef DAYS
